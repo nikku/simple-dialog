@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="../dist/dialog.css">
+</head>
+<body>
+
+  <h1>Open Dialogs</h1>
+
+  <p>
+    <button id="open">open</button>
+    <button id="open-no-backdrop">open-no-backdrop</button>
+    <button id="open-not-closable">not closable</button>
+  </p>
+
+  <p>
+    <button id="open-manual">open manual closable</button>
+    <button id="close-manual-1">close (1)</button>
+    <button id="close-manual-2">close (2)</button>
+    <span id="close-result"></span>
+  </p>
+
+  <script id="template" type="text/x-template">
+    <h2>header</h2>
+    <p>
+      Content
+    </p>
+  </script>
+
+  <script src="../dist/dialog.js"></script>
+
+  <script>
+
+    function click(selector, fn) {
+      var e = document.querySelector(selector);
+      e.addEventListener('click', fn);
+    }
+
+    click('#open', function(e) {
+      var dialog = Dialog({
+        template: document.querySelector('#template').innerHTML
+      });
+
+      dialog.open();
+    });
+
+    click('#open-no-backdrop', function(e) {
+      var dialog = Dialog({
+        template: document.querySelector('#template').innerHTML,
+        backdrop: false
+      });
+
+      dialog.open();
+    });
+
+    click('#open-not-closable', function(e) {
+
+      var id = 'dialog-not-closable';
+      var template =
+        document.querySelector('#template').innerHTML +
+        '<a onclick="document.querySelector(\'#' + id + '\').dialog.close()">CLOSE</a>';
+
+      var dialog = Dialog({
+        id: id,
+        template: template,
+        closable: false
+      });
+
+      dialog.open();
+    });
+
+
+    var manual = Dialog({
+      template: document.querySelector('#template').innerHTML
+    });
+
+    manual.on('close', function(result) {
+      document.querySelector('#close-result').innerText = result;
+    });
+
+    click('#open-manual', function() {
+      manual.open();
+    });
+
+    click('#close-manual-1', function() {
+      manual.close('ONE');
+    });
+
+    click('#close-manual-2', function() {
+      manual.close(2222);
+    });
+  </script>
+
+</body>
+<html>

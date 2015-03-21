@@ -1,0 +1,37 @@
+{
+  "name": "simple-dialog",
+  "version": "0.0.0",
+  "description": "A minimal modal dialog implementation",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-bundle": "lessc less/dialog.less > dist/dialog.css && browserify -t stringify index.js -s SimpleDialog -o dist/dialog.js && uglifyjs dist/dialog.js -cm > dist/dialog.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nikku/simple-dialog"
+  },
+  "keywords": [
+    "dialog",
+    "modal",
+    "web",
+    "overlay",
+    "emitter",
+    "browserify"
+  ],
+  "author": "Nico Rehwaldt <git_nikku@nixis.de>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nikku/simple-dialog/issues"
+  },
+  "homepage": "https://github.com/nikku/simple-dialog",
+  "devDependencies": {
+    "browserify": "^9.0.3",
+    "less": "^2.4.0",
+    "stringify": "^3.1.0",
+    "uglify-js": "^2.4.17"
+  },
+  "dependencies": {
+    "domify": "^1.3.2",
+    "events": "^1.0.2"
+  }
+}

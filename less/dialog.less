@@ -1,0 +1,58 @@
+@dlg-backdrop-opacity: 0.1;
+@dlg-width: 450px;
+
+.dlg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 100%;
+  right: 0;
+
+  opacity: 0;
+
+  text-align: center;
+
+  &.backdrop {
+    bottom: 0;
+    background: rgba(0, 0, 0, @dlg-backdrop-opacity);
+  }
+
+  &.open {
+    opacity: 1;
+  }
+
+  .dlg-body {
+    box-sizing: border-box;
+
+    width: @dlg-width;
+    max-width: 100%;
+
+    margin: auto;
+    margin-top: 100px;
+
+    padding: 10px;
+
+    /* style reset */
+    text-align: left;
+  }
+
+  .dlg-body {
+    background: white;
+    border: solid 1px #CCC;
+  }
+
+  .dlg-close {
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+  }
+
+  &:not(.closable) .dlg-close {
+    display: none;
+  }
+}
