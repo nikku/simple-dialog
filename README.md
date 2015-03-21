@@ -70,7 +70,7 @@ module.factory('ngSimpleDialog', function($rootScope, $compile) {
       var newBody = linkBody(scope),
           oldBody = getBody(dialog);
 
-      oldBody.parentNode.replaceChild(oldBody, newBody);
+      angular.element(oldBody).replaceWith(newBody);
     });
 
     dialog.on('close', function() {
