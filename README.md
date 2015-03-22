@@ -2,6 +2,8 @@
 
 A simple, yet powerful dialog implementation.
 
+![Open Dialog Window](https://github.com/nikku/simple-dialog/blob/master/resources/screenshot.png)
+
 
 ## Features
 
