@@ -7,10 +7,11 @@ A simple, yet powerful dialog implementation.
 
 ## Features
 
+* content from string or element
 * (optional) backdrop
 * (optional) close handle
 * (optional) modal
-* event emitter
+* life-cycle events
 * return values
 
 
@@ -20,7 +21,7 @@ A simple, yet powerful dialog implementation.
 var SimpleDialog = require('simple-dialog');
 
 var dialog = SimpleDialog({
-  template: '<h1>HEADER</h1>',
+  template: '<h1>HEADER</h1>'
 });
 
 // open dialog
