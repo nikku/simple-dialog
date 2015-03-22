@@ -21,13 +21,10 @@ var dialog = SimpleDialog({
   template: '<h1>HEADER</h1>',
 });
 
-// get result value
-dialog.on('close', function(returnValue) {
+// open dialog
+dialog.open(function(returnValue) {
   console.log('dialog closed with', returnValue);
 });
-
-// open dialog
-dialog.open();
 
 // close with value
 dialog.close({ foo: 'BAR' });
