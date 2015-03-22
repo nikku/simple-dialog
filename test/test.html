@@ -8,16 +8,18 @@
   <h1>Open various dialogs</h1>
 
   <p>
-    <button id="open">open</button>
+    <button id="open">open</button> Result: <span id="open-result"></span>
+  </p>
+  <p>
     <button id="open-no-backdrop">open-no-backdrop</button>
+  </p>
+  <p>
     <button id="open-not-closable">no simple close</button>
   </p>
 
   <p>
     <button id="open-manual">open manual closable</button>
-    <button id="close-manual-1">close (1)</button>
-    <button id="close-manual-2">close (2)</button>
-    <span id="close-result"></span>
+    Result: <span id="open-manual-result"></span>
   </p>
 
   <script id="template" type="text/x-template">
@@ -37,11 +39,18 @@
     }
 
     click('#open', function(e) {
+
+      var resultElement = document.querySelector('#open-result');
+
       var dialog = SimpleDialog({
         template: document.querySelector('#template').innerHTML
       });
 
-      dialog.open();
+      resultElement.innerHTML = '';
+
+      dialog.open(function(result) {
+        resultElement.innerText = result;
+      });
     });
 
     click('#open-no-backdrop', function(e) {
@@ -71,23 +80,22 @@
 
 
     var manual = SimpleDialog({
-      template: document.querySelector('#template').innerHTML
+      id: 'manual-dialog',
+      template: document.querySelector('#template').innerHTML +
+        '<button onclick="document.querySelector(\'#manual-dialog\').dialog.close(\'ONE\')">close (ONE)</button>' +
+        '<button onclick="document.querySelector(\'#manual-dialog\').dialog.close(2222)">close (2222)</button>'
+    });
+
+    manual.on('open', function() {
+      document.querySelector('#open-manual-result').innerText = '';
     });
 
     manual.on('close', function(result) {
-      document.querySelector('#close-result').innerText = result;
+      document.querySelector('#open-manual-result').innerText = result;
     });
 
     click('#open-manual', function() {
       manual.open();
-    });
-
-    click('#close-manual-1', function() {
-      manual.close('ONE');
-    });
-
-    click('#close-manual-2', function() {
-      manual.close(2222);
     });
   </script>
 
