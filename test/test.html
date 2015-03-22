@@ -5,7 +5,7 @@
 </head>
 <body>
 
-  <h1>Open Dialogs</h1>
+  <h1>Open various dialogs</h1>
 
   <p>
     <button id="open">open</button>
@@ -37,7 +37,7 @@
     }
 
     click('#open', function(e) {
-      var dialog = Dialog({
+      var dialog = SimpleDialog({
         template: document.querySelector('#template').innerHTML
       });
 
@@ -45,7 +45,7 @@
     });
 
     click('#open-no-backdrop', function(e) {
-      var dialog = Dialog({
+      var dialog = SimpleDialog({
         template: document.querySelector('#template').innerHTML,
         backdrop: false
       });
@@ -60,7 +60,7 @@
         document.querySelector('#template').innerHTML +
         '<a onclick="document.querySelector(\'#' + id + '\').dialog.close()">CLOSE</a>';
 
-      var dialog = Dialog({
+      var dialog = SimpleDialog({
         id: id,
         template: template,
         closable: false
@@ -70,7 +70,7 @@
     });
 
 
-    var manual = Dialog({
+    var manual = SimpleDialog({
       template: document.querySelector('#template').innerHTML
     });
 
