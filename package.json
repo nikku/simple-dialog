@@ -4,7 +4,7 @@
   "description": "A minimal modal dialog implementation",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-bundle": "lessc less/dialog.less > dist/dialog.css && browserify -t stringify index.js -s SimpleDialog -o dist/dialog.js && uglifyjs dist/dialog.js -cm > dist/dialog.min.js"
+    "build-bundle": "lessc less/dialog.less > dist/dialog.css && browserify index.js -s SimpleDialog -o dist/dialog.js && uglifyjs dist/dialog.js -cm > dist/dialog.min.js"
   },
   "repository": {
     "type": "git",
