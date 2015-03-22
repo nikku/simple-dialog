@@ -10,7 +10,7 @@
   <p>
     <button id="open">open</button>
     <button id="open-no-backdrop">open-no-backdrop</button>
-    <button id="open-not-closable">not closable</button>
+    <button id="open-not-closable">no simple close</button>
   </p>
 
   <p>
@@ -58,7 +58,7 @@
       var id = 'dialog-not-closable';
       var template =
         document.querySelector('#template').innerHTML +
-        '<a onclick="document.querySelector(\'#' + id + '\').dialog.close()">CLOSE</a>';
+        '<button onclick="document.querySelector(\'#' + id + '\').dialog.close()">CLOSE</button>';
 
       var dialog = SimpleDialog({
         id: id,
