@@ -2,6 +2,15 @@
 <html>
 <head>
   <link rel="stylesheet" href="../dist/dialog.css">
+  <style>
+    .dlg.foo {
+      background: fuchsia;
+    }
+
+    .dlg.bar .dlg-body {
+      border: solid 10px lime;
+    }
+  </style>
 </head>
 <body>
 
@@ -9,6 +18,9 @@
 
   <p>
     <button id="open">open</button> Result: <span id="open-result"></span>
+  </p>
+  <p>
+    <button id="open-class">open-class</button>
   </p>
   <p>
     <button id="open-no-backdrop">open-no-backdrop</button>
@@ -52,6 +64,18 @@
         resultElement.innerText = result;
       });
     });
+
+
+    click('#open-class', function(e) {
+
+      var dialog = SimpleDialog({
+        template: document.querySelector('#template').innerHTML,
+        className: 'foo bar'
+      });
+
+      dialog.open();
+    });
+
 
     click('#open-no-backdrop', function(e) {
       var dialog = SimpleDialog({

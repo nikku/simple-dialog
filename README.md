@@ -44,6 +44,7 @@ The dialog constructor accepts the following configuration options:
 {String}         [id]                an id to assign to the dialog
 {Element|String} [parent='body']     the parent node to attach the dialog to
 {Element|String} [template]          the element to display as the dialog content
+{String}         [className='']      classes to add to the .dlg element
 ```
 
 
