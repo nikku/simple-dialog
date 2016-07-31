@@ -48,9 +48,36 @@ The dialog constructor accepts the following configuration options:
 ```
 
 
+## API
+
+### `open([closeFn])`
+
+### `close([resultValue])`
+
+### `toggleClass('class list')`
+
+### `element: DOMElement`
+
+
+## Template
+
+The dialog is built from the following template:
+
+```html
+<div class="dlg">
+  <div class="dlg-body">
+    <a class="dlg-close" href>&times;</a>
+    <div class="dlg-content"></div>
+  </div>
+</div>
+```
+
+Default styling can be found in the `less/dialog.less` file.
+
+
 ## Access from the DOM
 
-The dialog will attach itself to its dom node via the `dialog` property ònce it is attached to the document tree.
+The dialog will attach itself to its dom node via the `dialog` property once it is attached to the document tree.
 
 ```javascript
 SimpleDialog({
@@ -59,10 +86,22 @@ SimpleDialog({
 });
 
 setTimeout(function() {
-  document.querySelector('#how-are-you').dialog.close();
+  SimpleDialog('#how-are-you').close();
 }, 2000);
 ```
 
+## Close from Template
+
+The dialog will close on elements annotated with `.dlg-close`.
+A custom close result can be provided via the `dlg-close-result` attribute
+on `.dlg-close` elements.
+
+```javascript
+SimpleDialog({
+  id: 'how-are-you',
+  template: '<button class="dlg-close" dlg-close-result="foo">FOO</button>'
+});
+```
 
 ## Extend the Dialog
 

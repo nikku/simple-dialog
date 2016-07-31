@@ -35,14 +35,12 @@
 
     /* style reset */
     text-align: left;
-  }
 
-  .dlg-body {
     background: white;
     border: solid 1px #CCC;
   }
 
-  .dlg-close {
+  .dlg-body > .dlg-close {
     float: right;
     font-size: 21px;
     font-weight: 700;
@@ -55,7 +53,7 @@
     text-decoration: none;
   }
 
-  &:not(.closable) .dlg-close {
+  &:not(.closable) .dlg-body > .dlg-close {
     display: none;
   }
 }

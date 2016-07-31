@@ -17,7 +17,12 @@
   <h1>Open various dialogs</h1>
 
   <p>
-    <button id="open">open</button> Result: <span id="open-result"></span>
+    <button id="open">open</button>
+    Result: <span id="open-result"></span>
+  </p>
+  <p>
+    <button id="open-buttons">open-buttons</button>
+    Result: <span id="open-buttons-result"></span>
   </p>
   <p>
     <button id="open-class">open-class</button>
@@ -41,6 +46,17 @@
     </p>
   </script>
 
+  <script id="template-with-buttons" type="text/x-template">
+    <h2>header</h2>
+    <p>
+      Content
+    </p>
+    <p>
+      <button class="dlg-close" dlg-close-result="ok">OK</button>
+      <button class="dlg-close" dlg-close-result="cancel">CANCEL</button>
+    </p>
+  </script>
+
   <script src="../dist/dialog.js"></script>
 
   <script>
@@ -56,6 +72,22 @@
 
       var dialog = SimpleDialog({
         template: document.querySelector('#template').innerHTML
+      });
+
+      resultElement.innerHTML = '';
+
+      dialog.open(function(result) {
+        resultElement.innerText = result;
+      });
+    });
+
+
+    click('#open-buttons', function(e) {
+
+      var resultElement = document.querySelector('#open-buttons-result');
+
+      var dialog = SimpleDialog({
+        template: document.querySelector('#template-with-buttons').innerHTML
       });
 
       resultElement.innerHTML = '';
@@ -86,6 +118,7 @@
       dialog.open();
     });
 
+
     click('#open-not-closable', function(e) {
 
       var id = 'dialog-not-closable';
@@ -103,24 +136,48 @@
     });
 
 
-    var manual = SimpleDialog({
-      id: 'manual-dialog',
-      template: document.querySelector('#template').innerHTML +
-        '<button onclick="document.querySelector(\'#manual-dialog\').dialog.close(\'ONE\')">close (ONE)</button>' +
-        '<button onclick="document.querySelector(\'#manual-dialog\').dialog.close(2222)">close (2222)</button>'
-    });
+    // test retrival
+    (function() {
 
-    manual.on('open', function() {
-      document.querySelector('#open-manual-result').innerText = '';
-    });
+      // dialog retrival test
+      var dialog = SimpleDialog({
+        id: 'foo-bar',
+        template: 'FOO BAR'
+      }).open();
 
-    manual.on('close', function(result) {
-      document.querySelector('#open-manual-result').innerText = result;
-    });
+      if (SimpleDialog('#foo-bar') !== dialog) {
+        throw new Error('expected SimpleDialog(#selector) to retrieve dialog');
+      }
 
-    click('#open-manual', function() {
-      manual.open();
-    });
+      if (SimpleDialog(document.querySelector('#foo-bar')) !== dialog) {
+        throw new Error('expected SimpleDialog(el) to retrieve dialog');
+      }
+
+      dialog.close();
+    })();
+
+
+    // test manual
+    (function() {
+      var dialog = SimpleDialog({
+        id: 'manual-dialog',
+        template: document.querySelector('#template').innerHTML +
+          '<button onclick="document.querySelector(\'#manual-dialog\').dialog.close(\'ONE\')">close (ONE)</button>' +
+          '<button onclick="document.querySelector(\'#manual-dialog\').dialog.close(2222)">close (2222)</button>'
+      });
+
+      dialog.on('open', function() {
+        document.querySelector('#open-manual-result').innerText = '';
+      });
+
+      dialog.on('close', function(result) {
+        document.querySelector('#open-manual-result').innerText = result;
+      });
+
+      click('#open-manual', function() {
+        dialog.open();
+      });
+    })();
   </script>
 
 </body>
